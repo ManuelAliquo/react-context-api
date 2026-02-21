@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import ProductCard from "../components/ProductCard";
 
+import { useBudget } from "../contexts/BudgetContext";
+
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
@@ -15,6 +17,13 @@ export default function ProductsPage() {
       setShowLoading(false);
     });
   }, []);
+
+  const { budgetMode } = useBudget();
+
+  // price filter
+  const filteredProducts = budgetMode
+    ? products.filter((product) => product.price <= 30)
+    : products;
 
   // loading conditional-render
   return showLoading ? (
@@ -29,7 +38,7 @@ export default function ProductsPage() {
       <section className="products-section">
         <h1 className="mb-4">Products</h1>
         <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4">
-          {products.map((product) => {
+          {filteredProducts.map((product) => {
             return (
               <Link
                 to={"/products/" + product.id}
