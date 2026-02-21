@@ -1,6 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+
+import BudgetModeBtn from "./BudgetModeBtn";
 
 export default function Navbar() {
+  let location = useLocation();
+  let inProducts;
+  location.pathname === "/products" ? (inProducts = true) : (inProducts = false);
+
   return (
     <header className="sticky-top">
       <nav
@@ -22,6 +28,8 @@ export default function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+            {/* budget btn, only in products page */}
+            {inProducts && <BudgetModeBtn />}
             {/* link-list */}
             <ul className="navbar-nav">
               <li className="nav-item">
@@ -40,9 +48,8 @@ export default function Navbar() {
                 </NavLink>
               </li>
             </ul>
-            {/* search + budget-btn */}
+            {/* search */}
             <div className="d-flex align-items-center gap-2">
-              <button className="btn btn-outline-info flex-shrink-0">Budget Mode</button>
               <input
                 name="searchbar"
                 className="form-control"
