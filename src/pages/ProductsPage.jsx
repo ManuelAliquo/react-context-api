@@ -16,7 +16,7 @@ export default function ProductsPage() {
     });
   }, []);
 
-  // condizionale per loading
+  // loading conditional-render
   return showLoading ? (
     <div className="d-flex align-items-center">
       <h1>Loading</h1>
@@ -26,16 +26,22 @@ export default function ProductsPage() {
     </div>
   ) : (
     <>
-      <h1 className="mb-4">Products</h1>
-      <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4">
-        {products.map((product) => {
-          return (
-            <Link to={"/products/" + product.id} className="text-decoration-none" key={product.id}>
-              <ProductCard product={product} className="product-card" />
-            </Link>
-          );
-        })}
-      </div>
+      <section className="products-section">
+        <h1 className="mb-4">Products</h1>
+        <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4">
+          {products.map((product) => {
+            return (
+              <Link
+                to={"/products/" + product.id}
+                className="text-decoration-none"
+                key={product.id}
+              >
+                <ProductCard product={product} className="product-card" />
+              </Link>
+            );
+          })}
+        </div>
+      </section>
     </>
   );
 }

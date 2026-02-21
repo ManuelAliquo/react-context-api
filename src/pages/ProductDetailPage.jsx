@@ -9,6 +9,7 @@ export default function ProductDetailPage() {
   const [product, setProduct] = useState({});
   const [showLoading, setShowLoading] = useState(true);
 
+  // single product request
   useEffect(() => {
     axios.get(`https://fakestoreapi.com/products/${id}`).then((res) => {
       if (!res.data) navigate("/404");
@@ -17,6 +18,7 @@ export default function ProductDetailPage() {
     });
   }, []);
 
+  // loading conditional-render
   if (showLoading)
     return (
       <div className="d-flex align-items-center">
@@ -27,6 +29,7 @@ export default function ProductDetailPage() {
       </div>
     );
 
+  // product conditional-render
   if (product)
     return (
       <section className="detail-section">

@@ -1,9 +1,5 @@
 import { NavLink } from "react-router-dom";
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-};
-
 export default function Header() {
   return (
     <header className="sticky-top">
@@ -42,8 +38,9 @@ export default function Header() {
                 </NavLink>
               </li>
             </ul>
-            <form onSubmit={handleSubmit} className="d-flex" role="search">
+            <div className="d-flex">
               <input
+                name="searchbar"
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
@@ -52,7 +49,7 @@ export default function Header() {
               <button className="btn btn-outline-primary">
                 <i className="bi bi-search"></i>
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </nav>
