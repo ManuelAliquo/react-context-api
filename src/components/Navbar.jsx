@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export default function Header() {
+export default function Navbar() {
   return (
     <header className="sticky-top">
       <nav
@@ -9,6 +9,7 @@ export default function Header() {
       >
         <div className="container-fluid">
           <h1 className="text-white">Random Shop 🛒</h1>
+          {/* hamburger menu */}
           <button
             className="navbar-toggler"
             type="button"
@@ -20,8 +21,9 @@ export default function Header() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse justify-content-end gap-4" id="navbarNav">
-            <ul className="navbar-nav gap-3">
+          <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+            {/* link-list */}
+            <ul className="navbar-nav">
               <li className="nav-item">
                 <NavLink to="/" className="nav-link">
                   Home
@@ -38,10 +40,12 @@ export default function Header() {
                 </NavLink>
               </li>
             </ul>
-            <div className="d-flex">
+            {/* search + budget-btn */}
+            <div className="d-flex align-items-center gap-2">
+              <button className="btn btn-outline-info flex-shrink-0">Budget Mode</button>
               <input
                 name="searchbar"
-                className="form-control me-2"
+                className="form-control"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
