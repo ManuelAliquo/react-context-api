@@ -1,8 +1,15 @@
 import { NavLink, useLocation } from "react-router-dom";
 
 import BudgetModeBtn from "./BudgetModeBtn";
+import { useBudget } from "../contexts/BudgetContext";
 
 export default function Navbar() {
+  const { budgetMode, setMaxPrice } = useBudget();
+
+  // input handler
+  const handleChange = (e) => setMaxPrice(e.target.value);
+
+  // useLocation for conditional render
   let location = useLocation();
   let inProducts;
   location.pathname === "/products" ? (inProducts = true) : (inProducts = false);
@@ -15,7 +22,7 @@ export default function Navbar() {
       >
         <div className="container-fluid">
           <h1 className="text-white">Random Shop 🛒</h1>
-          {/* hamburger menu */}
+          {/* toggle-menu */}
           <button
             className="navbar-toggler"
             type="button"
@@ -28,8 +35,28 @@ export default function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-            {/* budget btn, only in products page */}
-            {inProducts && <BudgetModeBtn />}
+            {/* filter-section, only in products-page */}
+            {inProducts && (
+              <div className="filter-section d-flex gap-2">
+                {budgetMode && (
+                  <div className="input-group flex-nowrap">
+                    <input
+                      onChange={handleChange}
+                      name="max-price"
+                      type="number"
+                      className="form-control"
+                      placeholder="Max Price"
+                      aria-label="Max Price"
+                      aria-describedby="addon-wrapping"
+                    />
+                    <span className="input-group-text" id="addon-wrapping">
+                      €
+                    </span>
+                  </div>
+                )}
+                <BudgetModeBtn />
+              </div>
+            )}
             {/* link-list */}
             <ul className="navbar-nav">
               <li className="nav-item">

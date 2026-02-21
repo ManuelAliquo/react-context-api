@@ -18,12 +18,11 @@ export default function ProductsPage() {
     });
   }, []);
 
-  const { budgetMode } = useBudget();
+  const { budgetMode, maxPrice } = useBudget();
 
   // price filter
-  const filteredProducts = budgetMode
-    ? products.filter((product) => product.price <= 30)
-    : products;
+  const filteredProducts =
+    budgetMode && maxPrice ? products.filter((product) => product.price <= maxPrice) : products;
 
   // loading conditional-render
   return showLoading ? (
